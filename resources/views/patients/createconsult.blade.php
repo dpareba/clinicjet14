@@ -19,6 +19,8 @@ Add Consultation for Patient Visit
 		border: 1px solid black;
 		margin-bottom: 2px;
 	}
+
+	
 </style>
 
 <div class="row">
@@ -225,7 +227,7 @@ Add Consultation for Patient Visit
 											<a type="button" id="addpath" class="btn btn btn-sm" style="color: gray;" data-toggle="modal" data-target="#myPathModal">
 												<i class="fa fa-plus"></i></a>
 											</div>
-											<select name="pathology[]" id="pathology" class="js-example-basic-multiple  form-control" multiple="multiple">
+											<select name="pathology[]" id="pathology" class="js-example-basic-multiple  form-control" multiple="multiple" >
 											{{-- @foreach ($pathologies as $pathology)
 											<option value="{{$pathology->id}}">{{$pathology->name}}</option>
 											@endforeach --}}
@@ -386,7 +388,7 @@ Add Consultation for Patient Visit
 														<div class="col-md-4 col-xs-12">
 															<div class="form-group dosetimespecial {{ $errors->has('dosetimespecial')?'has-error':''}}">
 																<label class="control-label" for="dosetimespecial">Dose Time (Special Instructions)</label>
-																<input type="text" name="dosetimespecial" id="dosetimespecial" class="form-control">
+																<input type="text" name="dosetimespecial" id="dosetimespecial" class="form-control" style="text-transform: capitalize;">
 																<span class="help-block">{{$errors->first('dosetimespecial')}}</span>
 															</div>
 														</div>
@@ -440,7 +442,7 @@ Add Consultation for Patient Visit
 																<label class="control-label" for="doseregimespeciallabel">Dose Regime (Special Instructions)</label>
 																<div class="input-group">
 																	<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-																	<textarea   name="doseregimespecial" id="doseregimespecial" class="form-control" cols="30" rows="2" style="resize: none;" placeholder="Special Instruction for Dose Regime"></textarea>
+																	<textarea   name="doseregimespecial" id="doseregimespecial" class="form-control" cols="30" rows="2" style="resize: none;text-transform: uppercase;" placeholder="Special Instruction for Dose Regime"></textarea>
 																</div>
 																<span class="help-block">{{$errors->first('doseregimespecial')}}</span>
 															</div>
@@ -1378,14 +1380,14 @@ minimumInputLength: 3,
   //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
 });
 
-$( function() {
+// $( function() {
 
-	$( "#chiefcomplaints" ).autocomplete({
-      // source: "http://localhost:8000/templates"
-      source: "{{route('templates.showcc')}}",
-      minLength: 3
-  });
-} );
+// 	$( "#chiefcomplaints" ).autocomplete({
+      
+//       source: '{{route('templates.showcc')}}',
+//       minLength: 3
+//   });
+// } );
 
 $(function(){
 	$("#examinationfindings").autocomplete({

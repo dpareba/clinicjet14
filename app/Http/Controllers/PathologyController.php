@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Pathology;
 use Illuminate\Support\Facades\Input;
 use Auth;
+use Illuminate\Support\Str;
 
 class PathologyController extends Controller
 {
@@ -64,7 +65,7 @@ class PathologyController extends Controller
             'pathname.unique'=>'Investigation Name already exists'
         ]);
        $pathology = new Pathology;
-       $pathology->name = $request->pathname;
+       $pathology->name = Str::upper($request->pathname);
        $pathology->category_id = '45';
        $pathology->user_id = Auth::user()->id;
        $pathology->save();

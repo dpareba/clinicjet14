@@ -168,9 +168,9 @@ if ($request->has('medid')) {
         $prescription->medicinename = $request->mednameonly[$count];
         $prescription->medicinecomposition = $request->medcomp[$count];
         $prescription->doseduration = $request->doseduration[$count];
-        $prescription->dosetimings = $request->dosetimings[$count];
-        $prescription->doseregime = $request->doseregime[$count];
-        $prescription->remarks = $request->remarks[$count];
+        $prescription->dosetimings = Str::title($request->dosetimings[$count]);
+        $prescription->doseregime = Str::upper($request->doseregime[$count]);
+        $prescription->remarks = Str::upper($request->remarks[$count]);
         $prescription->save();
         $count++;
     }
