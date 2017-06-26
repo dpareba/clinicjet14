@@ -239,8 +239,10 @@ Add Consultation for Patient Visit
 								
 							</div>
 							{{-- .row --}}
-
-							<hr>
+							<div class="bg-primary">
+								<hr style="height: 1px;">
+							</div>
+							
 
 							@if ($patient->gender == "FEMALE")
 							<div class="row">
@@ -258,10 +260,13 @@ Add Consultation for Patient Visit
 							<hr>
 							@endif
 
+							
 							<div class="row">
-								<div class="col-md-6 col-xs-12 ">
+								<div class="col-md-4 col-xs-12 ">
 									<div class="form-group {{ $errors->has('systolic') || $errors->has('diastolic')?'has-error':''}}">
-										<label for="">Blood Pressure (Systolic/Diastolic) in mmHg</label>
+										<div style="text-align: center;">
+										<label for="" >Blood Pressure (Systolic/Diastolic) in mmHg</label>
+										</div>
 										<div class="row">
 											<div class="col-md-6 ">
 												<input  data-parsley-type="digits" minlength="2" maxlength="3"  name="systolic" id="systolic" class="form-control" placeholder="Systolic (mmHg)"  style="text-align: center;">
@@ -278,24 +283,55 @@ Add Consultation for Patient Visit
 										@endif
 									</div>
 								</div>
-								<div class="col-md-6 col-xs-12">
+								<div class="col-md-2 col-xs-12">
 									<div class="form-group {{ $errors->has('randombs')?'has-error':''}}">
-										<label class="control-label" for="randombs">Random Blood Sugar (mg/dl)</label>
-
-										<input  data-parsley-type="number" value="{{old('randombs')}}"  class="form-control" id="randombs" name="randombs" placeholder="Random Blood Sugar (mg/dl)" minlength="2" maxlength="3" style="text-align: center;" >
+										<div style="text-align: center;">
+										<label class="control-label" for="randombs">Random Blood Sugar</label>
+										</div>
+										<input  data-parsley-type="number" value="{{old('randombs')}}"  class="form-control" id="randombs" name="randombs" placeholder="mg/dl" minlength="2" maxlength="3" style="text-align: center;" >
 										
 										<span class="help-block">{{$errors->first('randombs')}}</span>
 									</div>
 								</div>
 								
 							</div>
+							{{-- .row --}}
+							<hr>
+							
 
-							<div class="row">
+							{{-- <div class="row">
 								<div class="col-md-6 col-xs-12">
 									{!! $chart->render() !!}
 								</div>
 							</div>
-							<hr>
+							<hr> --}}
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="nav-tabs-custom">
+										<!-- Tabs within a box -->
+										<ul class="nav nav-tabs ">
+											<li class="header" style="color: green;"></li>
+											<li class="active"><a href="#bp" data-toggle="tab">Blood Pressure</a></li>
+											<li><a href="#revenue-chart" data-toggle="tab">Random Blood Sugar</a></li>
+											
+										</ul>
+										<div class="tab-content no-padding">
+											<!-- Morris chart - Sales -->
+											<div class="chart tab-pane active" id="bp" style="position: relative; height: 200px;">{!! $chart->render() !!}</div>
+											<div class="chart tab-pane" id="revenue-chart" style="position: relative; height: 200px;"></div>
+											
+										</div>
+									</div>
+									<!-- /.nav-tabs-custom -->
+								</div>
+								
+							</div>
+							{{-- .row --}}
+							<div class="bg-primary">
+								<hr style="height: 1px;">
+							</div>
+							
 
 							{{-- =====================================TESTING================================================= --}}
 
@@ -1383,7 +1419,7 @@ minimumInputLength: 3,
 // $( function() {
 
 // 	$( "#chiefcomplaints" ).autocomplete({
-      
+
 //       source: '{{route('templates.showcc')}}',
 //       minLength: 3
 //   });
@@ -1598,18 +1634,18 @@ $('#addeftemplate').click(function(e){
 			//console.log($templates);
 			//
 			console.log(response.length);
-			 if (response.length > 0) {
+			if (response.length > 0) {
 				$('#templatename').empty();
 				//$('#templatename1').hide();
 				$('#templatename').append('<option value="None"  selected="">None</option>');
-			 	for(i=0; i<response.length; i++){
-			 		
-			 		$('#templatename').append('<option value="'+response[i]['templatename']+'">'+response[i]['templatename']+'</option>');
+				for(i=0; i<response.length; i++){
+
+					$('#templatename').append('<option value="'+response[i]['templatename']+'">'+response[i]['templatename']+'</option>');
 			  		//console.log(response[i]['id']);
-			 	}
+			  	}
 			  }else{
 			  	$('#templatename').empty();
-			 	$('#templatename').append('<option value="None" selected="">else</option>');
+			  	$('#templatename').append('<option value="None" selected="">else</option>');
 			  }
 
 			},
