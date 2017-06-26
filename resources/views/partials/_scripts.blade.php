@@ -27,6 +27,7 @@
 <script src="{{asset('js/lightbox.min.js')}}"></script>
 <script src="{{asset('js/moment.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/js/bootstrap-datepicker.min.js"></script>
 
 
 @yield('scripts')

@@ -44,43 +44,76 @@ Assign Token to Patients
 	</div>
 	{{-- .row --}}
 	
-		<div class="row">
-			<div class="col-md-12">
-				<div class="box box-solid box-primary">
-					<div class="box-header with-border">
-						<h3 class="box-title">Assign Token</h3>
-						<div class="box-tools pull-right">
-							
-						</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box box-solid box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Assign Token</h3>
+					<div class="box-tools pull-right">
+
 					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<form action="" method="POST">
-							{{csrf_field()}}
-							<div class="row">
-								<div class="col-md-4 col-xs-12">
-									<div class="form-group {{ $errors->has('user')?'has-error':''}}">
-										<label class="control-label" for="user">Select Doctor</label>
-										<select style="text-align: center;" required="" name="user" id="user" class="form-control">
-											<option value="" selected=""></option>
-											@foreach ($users as $u)
-											<option value="{{$u->id}}" >{{$u->name}}</option>
-											@endforeach
-										</select>
-										
-										<span class="help-block">{{$errors->first('user')}}</span>
-									</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<form action="" method="POST">
+						{{csrf_field()}}
+						<div class="row">
+							<div class="col-md-4 col-xs-12">
+								<div class="form-group {{ $errors->has('user')?'has-error':''}}">
+									<label class="control-label" for="user">Select Doctor</label>
+									<select style="text-align: center;" required="" name="user" id="user" class="form-control">
+										<option value="" selected=""></option>
+										@foreach ($users as $u)
+										<option value="{{$u->id}}" >{{$u->name}}</option>
+										@endforeach
+									</select>
+
+									<span class="help-block">{{$errors->first('user')}}</span>
 								</div>
 							</div>
-							{{-- .row --}}
-						</form>
-					</div>
-					{{-- .box-body --}}
+
+							<div class="col-md-4 col-xs-12">
+								<div class="form-group">
+									<label>Date:</label>
+
+									<div class="input-group date">
+										<div class="input-group-addon">
+											<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right" id="datepicker">
+									</div>
+									<!-- /.input group -->
+								</div>
+							</div>
+						</div>
+						{{-- .row --}}
+						<div class="row">
+
+						</div>
+						{{-- .row --}}
+					</form>
 				</div>
-				{{-- .box --}}
+				{{-- .box-body --}}
 			</div>
+			{{-- .box --}}
 		</div>
+	</div>
 	
 	
 	{{-- .row --}}
 	@endsection
+
+	@section('scripts')
+	<script>
+		$(function(){
+				//Date picker
+				$('#datepicker').datepicker({
+					autoclose: true,
+					format: "dd/mm/yyyy",
+					startDate: new Date(),
+					todayHighlight: true
+
+				});
+			});
+		</script>
+		@endsection
