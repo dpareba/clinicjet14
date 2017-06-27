@@ -202,9 +202,13 @@ class PatientController extends Controller
         //$pathologies = Pathology::all();
         $pathologies = Pathology::where('user_id','=','1')->orWhere('user_id','=',Auth::user()->id)->get();
         $templates = Template::where('user_id','=',Auth::user()->id)->get();
-        $data = Visit::where('patient_id','=',$patient->id)->where('systolic','!=','')->where('diastolic','!=','')->get();
+        $bpdata = Visit::where('patient_id','=',$patient->id)->where('systolic','!=','')->where('diastolic','!=','')->get();
+        $randombsdata = Visit::where('patient_id','=',$patient->id)->where('randombs','!=','')->get();
+        $pulsedata = Visit::where('patient_id','=',$patient->id)->where('pulse','!=','')->get();
+        $respratedata = Visit::where('patient_id','=',$patient->id)->where('resprate','!=','')->get();
+        $spodata = Visit::where('patient_id','=',$patient->id)->where('spo','!=','')->get();
 
-        $chart = Charts::multi('areaspline','highcharts')
+        $bpchart = Charts::multi('areaspline','highcharts')
                         ->height(300)
                         //->colors(['#58355E','#7AE7C7'])
                         //->colors(['#6E0D25','#FFFFB3'])
@@ -212,13 +216,49 @@ class PatientController extends Controller
                         ->colors(['#72DDF7','#2F4858'])
                         ->title('Blood Pressure (mmHg)')
                         ->elementLabel('mmHg')
-                        ->labels($data->pluck('created_at'))
-                        ->dataset('Systolic',$data->pluck('systolic'))
-                        ->dataset('Diastolic',$data->pluck('diastolic'))
+                        ->labels($bpdata->pluck('created_at'))
+                        ->dataset('Systolic',$bpdata->pluck('systolic'))
+                        ->dataset('Diastolic',$bpdata->pluck('diastolic'))
                         ->responsive(false)
                         ;
 
-        return view('patients.createconsult')->withPatient($patient)->withUser($user)->withPathologies($pathologies)->withChart($chart)->withTemplates($templates);
+        $randombschart = Charts::multi('line','highcharts')
+                        ->height(300)
+                        ->colors(['#2F4858'])
+                        ->title('Random Blood Sugar (mg/dl)')
+                        ->elementLabel('mg/dl')
+                        ->labels($randombsdata->pluck('created_at'))
+                        ->dataset('Random Blood Sugar',$randombsdata->pluck('randombs'))
+                        ->responsive(false);
+
+        $pulsechart = Charts::multi('bar','highcharts')
+                        ->height(300)
+                        ->colors(['#2F4858'])
+                        ->title('Pulse (beats per minute)')
+                        ->elementLabel('beats per minute')
+                        ->labels($pulsedata->pluck('created_at'))
+                        ->dataset('Pulse',$pulsedata->pluck('pulse'))
+                        ->responsive(false);
+
+        $respratechart = Charts::multi('area','highcharts')
+                        ->height(300)
+                        ->colors(['#2F4858'])
+                        ->title('Respiratory Rate (breaths per minute)')
+                        ->elementLabel('breaths per minute')
+                        ->labels($respratedata->pluck('created_at'))
+                        ->dataset('Random Blood Sugar',$respratedata->pluck('resprate'))
+                        ->responsive(false);
+
+        $spochart = Charts::multi('areaspline','highcharts')
+                        ->height(300)
+                        ->colors(['#2F4858'])
+                        ->title('SPO2 (%)')
+                        ->elementLabel('%')
+                        ->labels($spodata->pluck('created_at'))
+                        ->dataset('SPO2',$spodata->pluck('spo'))
+                        ->responsive(false);
+
+        return view('patients.createconsult')->withPatient($patient)->withUser($user)->withPathologies($pathologies)->withBpchart($bpchart)->withRandombschart($randombschart)->withPulsechart($pulsechart)->withRespratechart($respratechart)->withSpochart($spochart)->withTemplates($templates);
     }
     /**
      * Display the specified resource.

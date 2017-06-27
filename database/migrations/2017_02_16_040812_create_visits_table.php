@@ -25,6 +25,10 @@ class CreateVisitsTable extends Migration
             $table->text('advise')->nullable();
             $table->string('systolic')->nullable();
             $table->string('diastolic')->nullable();
+            $table->string('randombs')->nullable();
+            $table->string('pulse')->nullable();
+            $table->string('resprate')->nullable();
+            $table->string('spo')->nullable();
             $table->boolean('isSOS')->default(true);
             $table->date('nextvisit');
             $table->integer('clinic_id')->unsigned();

@@ -102,6 +102,22 @@
 		<div class="cc"><b>BP</b> {{$visit->systolic}}/{{$visit->diastolic}} mm Hg</div>
 	@endif
 
+	@if ($visit->randombs != "")
+		<div class="{{$visit->systolic != "" && $visit->diastolic != ""?'':'cc'}}"><b>Random Blood Sugar</b> {{$visit->randombs}} mg/dl</div>
+	@endif
+
+	@if ($visit->pulse != "")
+		<div class="{{($visit->systolic != "" && $visit->diastolic != "")||$visit->randombs != ""?'':'cc'}}"><b>Pulse</b> {{$visit->randombs}} beats per minute</div>
+	@endif
+
+	@if ($visit->resprate != "")
+		<div class="{{($visit->systolic != "" && $visit->diastolic != "")||$visit->randombs != ""||$visit->pulse != ""?'':'cc'}}"><b>Respiratory Rate</b> {{$visit->resprate}} breaths per minute</div>
+	@endif
+
+	@if ($visit->spo != "")
+		<div class="{{($visit->systolic != "" && $visit->diastolic != "")||$visit->randombs != ""||$visit->pulse != ""||$visit->resprate != ""?'':'cc'}}"><b>SPO2</b> {{$visit->spo}} %</div>
+	@endif
+
 	<div class="cc"><b>Recommended Clinical Follow up</b>
 		<ul>
 			@foreach ($visit->pathologies as $pathology)

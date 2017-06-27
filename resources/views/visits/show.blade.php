@@ -200,9 +200,36 @@ Patient Visit Details
 									<div>
 										<strong>BP </strong>{{$visit->systolic}}/{{$visit->diastolic}} mm Hg
 									</div>	
-									<br>
 									@endif
 
+									@if ($visit->randombs != "" )
+									<div>
+										<strong>Random Blood Sugar </strong>{{$visit->randombs}} mg/dl
+									</div>	
+									@endif
+
+									@if ($visit->pulse != "" )
+									<div>
+										<strong>Pulse </strong>{{$visit->pulse}} beats per minute
+									</div>	
+									@endif
+
+									@if ($visit->resprate != "" )
+									<div>
+										<strong>Respiratory Rate </strong>{{$visit->resprate}} breaths per minute
+									</div>	
+									@endif
+
+									@if ($visit->spo != "" )
+									<div>
+										<strong>SPO2 </strong>{{$visit->spo}} %
+									</div>	
+									@endif
+
+									@if (($visit->systolic != "" && $visit->diastolic !="") || $visit->randombs != "" || $visit->pulse != "" || $visit->resprate != "" || $visit->spo != "")
+										<br>
+									@endif
+									
 									<dl>
 										<dt>Recommended Clinical Followup</dt>
 										<ul>

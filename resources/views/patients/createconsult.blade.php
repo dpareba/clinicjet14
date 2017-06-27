@@ -100,10 +100,10 @@ Add Consultation for Patient Visit
 										<a type="button" id="addcc" href="" style="color: gray;" data-toggle="modal" data-target="#ccModal">
 											<i class="fa fa-plus"></i></a>
 										</div> --}}
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-											<textarea event.preventDefault(); style="resize:none;text-transform: uppercase;" autofocus=""  name="chiefcomplaints" id="chiefcomplaints" class="form-control" cols="30" rows="3"  placeholder="Chief Complaints" required="">{{old('chiefcomplaints')}}</textarea>
-										</div>
+										{{-- <div class="input-group"> --}}
+										{{-- <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span> --}}
+										<textarea event.preventDefault(); style="resize:none;text-transform: uppercase;" autofocus=""  name="chiefcomplaints" id="chiefcomplaints" class="form-control" cols="30" rows="3"  placeholder="Chief Complaints" required="">{{old('chiefcomplaints')}}</textarea>
+										{{-- </div> --}}
 										<span class="help-block">{{$errors->first('chiefcomplaints')}}</span>
 									</div>
 								</div>
@@ -111,10 +111,10 @@ Add Consultation for Patient Visit
 								<div class="col-md-6 col-xs-12">
 									<div class="form-group {{ $errors->has('patienthistory')?'has-error':''}}">
 										<label class="control-label" for="patienthistory">History of Presenting Complaints</label>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-											<textarea  event.preventDefault(); style="text-transform: uppercase;resize: none;" name="patienthistory" id="patienthistory" class="form-control" cols="30" rows="3" style="resize: none;" placeholder="Patient History" required="">{{old('patienthistory')}}</textarea>
-										</div>
+										{{-- <div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span> --}}
+										<textarea  event.preventDefault(); style="text-transform: uppercase;resize: none;" name="patienthistory" id="patienthistory" class="form-control" cols="30" rows="3" style="resize: none;" placeholder="Patient History" required="">{{old('patienthistory')}}</textarea>
+										{{-- </div> --}}
 										<span class="help-block">{{$errors->first('patienthistory')}}</span>
 									</div>
 								</div>
@@ -155,10 +155,10 @@ Add Consultation for Patient Visit
 												<button type="button" class="btn btn-xs btn-default btn-flat" id="addef" data-toggle="modal" data-target="#efModal">Add Examination Findings Template</button>
 											</div> --}}
 										</div>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-											<textarea event.preventDefault(); style="text-transform: uppercase;resize: none;"  name="examinationfindings" id="examinationfindings" class="form-control" cols="30" rows="3" style="resize: none;" placeholder="Examination Findings" required="">{{old('examinationfindings')}}</textarea>
-										</div>
+										{{-- <div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span> --}}
+										<textarea event.preventDefault(); style="text-transform: uppercase;resize: none;"  name="examinationfindings" id="examinationfindings" class="form-control" cols="30" rows="3" style="resize: none;" placeholder="Examination Findings" required="">{{old('examinationfindings')}}</textarea>
+										{{-- </div> --}}
 										<span class="help-block">{{$errors->first('examinationfindings')}}</span>
 									</div>
 								</div>
@@ -167,10 +167,10 @@ Add Consultation for Patient Visit
 								<div class="col-md-6 col-xs-12">
 									<div class="form-group {{ $errors->has('diagnosis')?'has-error':''}}">
 										<label class="control-label" for="diagnosis">Diagnosis</label>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-											<textarea event.preventDefault(); style="text-transform: uppercase; resize: none;"  name="diagnosis" id="diagnosis" class="form-control" cols="30" rows="3" placeholder="Diagnosis" required="">{{old('diagnosis')}}</textarea>
-										</div>
+										{{-- <div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span> --}}
+										<textarea event.preventDefault(); style="text-transform: uppercase; resize: none;"  name="diagnosis" id="diagnosis" class="form-control" cols="30" rows="3" placeholder="Diagnosis" required="">{{old('diagnosis')}}</textarea>
+										{{-- </div> --}}
 										<span class="help-block">{{$errors->first('diagnosis')}}</span>
 									</div>
 								</div>
@@ -180,10 +180,10 @@ Add Consultation for Patient Visit
 								<div class="col-md-6 col-xs-12">
 									<div class="form-group {{ $errors->has('advise')?'has-error':''}}">
 										<label class="control-label" for="advise">Advise</label>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-											<textarea event.preventDefault(); style="text-transform: uppercase;resize: none;" name="advise" id="advise" class="form-control" cols="30" rows="3"  placeholder="Advise" required="">{{old('advise')}}</textarea>
-										</div>
+										{{-- <div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span> --}}
+										<textarea event.preventDefault(); style="text-transform: uppercase;resize: none;" name="advise" id="advise" class="form-control" cols="30" rows="3"  placeholder="Advise" required="">{{old('advise')}}</textarea>
+										{{-- </div> --}}
 										<span class="help-block">{{$errors->first('advise')}}</span>
 									</div>
 								</div>
@@ -262,10 +262,10 @@ Add Consultation for Patient Visit
 
 							
 							<div class="row">
-								<div class="col-md-4 col-xs-12 ">
+								<div class="col-md-6 col-xs-12 ">
 									<div class="form-group {{ $errors->has('systolic') || $errors->has('diastolic')?'has-error':''}}">
 										<div style="text-align: center;">
-										<label for="" >Blood Pressure (Systolic/Diastolic) in mmHg</label>
+											<label for="" >Blood Pressure (Systolic/Diastolic) in mmHg</label>
 										</div>
 										<div class="row">
 											<div class="col-md-6 ">
@@ -283,12 +283,12 @@ Add Consultation for Patient Visit
 										@endif
 									</div>
 								</div>
-								<div class="col-md-2 col-xs-12">
+								<div class="col-md-6 col-xs-12">
 									<div class="form-group {{ $errors->has('randombs')?'has-error':''}}">
 										<div style="text-align: center;">
-										<label class="control-label" for="randombs">Random Blood Sugar</label>
+											<label class="control-label" for="randombs">Random Blood Sugar</label>
 										</div>
-										<input  data-parsley-type="number" value="{{old('randombs')}}"  class="form-control" id="randombs" name="randombs" placeholder="mg/dl" minlength="2" maxlength="3" style="text-align: center;" >
+										<input  data-parsley-type="digits" value="{{old('randombs')}}"  class="form-control" id="randombs" name="randombs" placeholder="mg/dl" minlength="2" maxlength="3" style="text-align: center;" >
 										
 										<span class="help-block">{{$errors->first('randombs')}}</span>
 									</div>
@@ -296,38 +296,92 @@ Add Consultation for Patient Visit
 								
 							</div>
 							{{-- .row --}}
-							<hr>
+
+							
+							
 							
 
-							{{-- <div class="row">
+							<div class="row">
 								<div class="col-md-6 col-xs-12">
-									{!! $chart->render() !!}
+									{!! $bpchart->render() !!}
+								</div>
+								<div class="col-md-6 col-xs-12">
+									{!! $randombschart->render() !!}
 								</div>
 							</div>
-							<hr> --}}
+							<hr>
 
-							<div class="row">
+							{{-- <div class="row">
 								<div class="col-md-12">
 									<div class="nav-tabs-custom">
 										<!-- Tabs within a box -->
 										<ul class="nav nav-tabs ">
 											<li class="header" style="color: green;"></li>
 											<li class="active"><a href="#bp" data-toggle="tab">Blood Pressure</a></li>
-											<li><a href="#revenue-chart" data-toggle="tab">Random Blood Sugar</a></li>
+											<li><a href="#randombs" data-toggle="tab">Random1 Blood Sugar</a></li>
 											
 										</ul>
 										<div class="tab-content no-padding">
 											<!-- Morris chart - Sales -->
-											<div class="chart tab-pane active" id="bp" style="position: relative; height: 200px;">{!! $chart->render() !!}</div>
-											<div class="chart tab-pane" id="revenue-chart" style="position: relative; height: 200px;"></div>
+											<div class="chart tab-pane active" id="bp" style="position: relative; height: 300px;">{!! $bpchart->render() !!}</div>
+											<div class="chart tab-pane" id="randombs" style="position: relative; height: 300px;">dsg</div>
 											
 										</div>
 									</div>
-									<!-- /.nav-tabs-custom -->
+									
 								</div>
 								
+							</div> --}}
+							{{-- .row --}}
+
+							<div class="row">
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group {{ $errors->has('pulse')?'has-error':''}}">
+										<div style="text-align: center;">
+											<label class="control-label" for="pulse">Pulse Rate</label>
+										</div>
+										<input  data-parsley-type="digits" value="{{old('pulse')}}"  class="form-control" id="pulse" name="pulse" placeholder="beats per minute" minlength="2" maxlength="3" style="text-align: center;" >
+										
+										<span class="help-block">{{$errors->first('pulse')}}</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group {{ $errors->has('resprate')?'has-error':''}}">
+										<div style="text-align: center;">
+											<label class="control-label" for="resprate">Respiratory Rate</label>
+										</div>
+										<input  data-parsley-type="digits" value="{{old('resprate')}}"  class="form-control" id="resprate" name="resprate" placeholder="breaths per minute" minlength="2" maxlength="2" style="text-align: center;" >
+										
+										<span class="help-block">{{$errors->first('resprate')}}</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group {{ $errors->has('spo')?'has-error':''}}">
+										<div style="text-align: center;">
+											<label class="control-label" for="spo">SPO2 (%)</label>
+										</div>
+										<input  data-parsley-type="digits" value="{{old('spo')}}"  class="form-control" id="spo" name="spo" placeholder="%" minlength="2" maxlength="3" style="text-align: center;" >
+										
+										<span class="help-block">{{$errors->first('spo')}}</span>
+									</div>
+								</div>
 							</div>
 							{{-- .row --}}
+
+							<div class="row">
+								<div class="col-md-4 col-xs-12">
+									{!! $pulsechart->render() !!}
+								</div>
+								<div class="col-md-4 col-xs-12">
+									{!! $respratechart->render() !!}
+								</div>
+								<div class="col-md-4 col-xs-12">
+									{!! $spochart->render() !!}
+								</div>
+							</div>
+							<hr>
+
+
 							<div class="bg-primary">
 								<hr style="height: 1px;">
 							</div>
@@ -721,14 +775,41 @@ Add Consultation for Patient Visit
 													<!-- /.box -->
 												</div>
 												@endif
+
 												@if ($visit->systolic != "" && $visit->diastolic !="")
 												<div>
 													<strong>BP </strong>{{$visit->systolic}}/{{$visit->diastolic}} mm Hg
 												</div>	
-												<br>
 												@endif
 
+												@if ($visit->randombs != "" )
+												<div>
+													<strong>Random Blood Sugar </strong>{{$visit->randombs}} mg/dl
+												</div>	
+												@endif
 
+												@if ($visit->pulse != "" )
+												<div>
+													<strong>Pulse </strong>{{$visit->pulse}} beats per minute
+												</div>	
+												@endif
+
+												@if ($visit->resprate != "" )
+												<div>
+													<strong>Respiratory Rate </strong>{{$visit->resprate}} breaths per minute
+												</div>	
+												@endif
+
+												@if ($visit->spo != "" )
+												<div>
+													<strong>SPO2 </strong>{{$visit->spo}} %
+												</div>	
+												@endif
+
+												@if (($visit->systolic != "" && $visit->diastolic !="") || $visit->randombs != "" || $visit->pulse != "" || $visit->resprate != "" || $visit->spo != "")
+												<br>
+												@endif
+												
 												<dl>
 													<dt>Recommended Clinical Followup</dt>
 													<ul>

@@ -87,10 +87,10 @@ class VisitController extends Controller
      // }
         //dd($request);
 
-       if ($request->followuptype == "SOS") {
+     if ($request->followuptype == "SOS") {
         // if (($request->systolic=="" && $request->diastolic!="")||($request->systolic!="" && $request->diastolic=="")) {
-           $this->validate($request,[
-            
+         $this->validate($request,[
+
             'followuptype'=>'required',
             'chiefcomplaints'=>'required',
             'examinationfindings'=>'required',
@@ -108,79 +108,83 @@ class VisitController extends Controller
             ]);
        // }
 
-   }else{
-    $this->validate($request,[
-        'followuptype'=>'required',
-        'nextvisit'=>'required|date_format:d/m/Y|after:yesterday',
-        'chiefcomplaints'=>'required',
-        'examinationfindings'=>'required',
-        'patienthistory'=>'required',
-        'diagnosis'=>'required',
-        'advise'=>'required'
-        ],[
-        'followuptype.required'=>'Follow up type required',
-        'nextvisit.required'=>'Follow up Date cannot be left blank',
-        'nextvisit.date'=>'Incorrect Date Format',
-        'nextvisit.after'=>'The Follow Up Date cannot be a value before today',
-        'chiefcomplaints.required'=>'Chief Complaints cannot be blank!',
-        'examinationfindings.required'=>'Examination Findings cannot be blank!',
-        'patienthistory.required'=>'Patient History cannot be blank!',
-        'diagnosis.required'=>'Diagnosis cannot be blank!',
-        'advise.required'=>'Advise cannot be blank!'
-        ]);
-}
-
-
-$patient = Patient::find($request->patient_id);
-        //dd($patient);
-$clinic = Clinic::where(['cliniccode'=>Session::get('cliniccode')])->first();
-$visit = new Visit;
-$visit->chiefcomplaints = Str::upper($request->chiefcomplaints);
-$visit->examinationfindings = Str::upper($request->examinationfindings);
-$visit->patienthistory = Str::upper($request->patienthistory);
-$visit->diagnosis = Str::upper($request->diagnosis);
-$visit->advise = Str::upper($request->advise);
-$visit->systolic = $request->systolic;
-$visit->diastolic = $request->diastolic;
-if ($request->followuptype == "SOS") {
-    $visit->isSOS = true;
-    $visit->nextvisit = Carbon::createFromFormat('d/m/Y','01/01/1900');
-}else{
-    $visit->isSOS = false;
-    $visit->nextvisit = Carbon::createFromFormat('d/m/Y',$request->nextvisit);
-}
-$visit->patient_id = $patient->id;
-$visit->clinic_id = $clinic->id;
-$visit->created_by_name = Auth::user()->name;
-$visit->user_id = Auth::user()->id;
-$visit->save();
-
-if ($request->has('pathology')) {
-    $visit->pathologies()->sync($request->pathology,false);
-}
-
-if ($request->has('medid')) {
-    $count = 0;
-    foreach ($request->medid as $r) {
-        $prescription = new Prescription;
-        $prescription->visit_id = $visit->id;
-        $prescription->medicine_id = $request->medid[$count];
-        $prescription->medicinename = $request->mednameonly[$count];
-        $prescription->medicinecomposition = $request->medcomp[$count];
-        $prescription->doseduration = $request->doseduration[$count];
-        $prescription->dosetimings = Str::title($request->dosetimings[$count]);
-        $prescription->doseregime = Str::upper($request->doseregime[$count]);
-        $prescription->remarks = Str::upper($request->remarks[$count]);
-        $prescription->save();
-        $count++;
+     }else{
+        $this->validate($request,[
+            'followuptype'=>'required',
+            'nextvisit'=>'required|date_format:d/m/Y|after:yesterday',
+            'chiefcomplaints'=>'required',
+            'examinationfindings'=>'required',
+            'patienthistory'=>'required',
+            'diagnosis'=>'required',
+            'advise'=>'required'
+            ],[
+            'followuptype.required'=>'Follow up type required',
+            'nextvisit.required'=>'Follow up Date cannot be left blank',
+            'nextvisit.date'=>'Incorrect Date Format',
+            'nextvisit.after'=>'The Follow Up Date cannot be a value before today',
+            'chiefcomplaints.required'=>'Chief Complaints cannot be blank!',
+            'examinationfindings.required'=>'Examination Findings cannot be blank!',
+            'patienthistory.required'=>'Patient History cannot be blank!',
+            'diagnosis.required'=>'Diagnosis cannot be blank!',
+            'advise.required'=>'Advise cannot be blank!'
+            ]);
     }
-}
 
-Session::flash('message','Success!!');
-Session::flash('text','New Consultation Created!!');
-Session::flash('type','success');
 
-return redirect()->route('patients.show',$request->patient_id);
+    $patient = Patient::find($request->patient_id);
+        //dd($patient);
+    $clinic = Clinic::where(['cliniccode'=>Session::get('cliniccode')])->first();
+    $visit = new Visit;
+    $visit->chiefcomplaints = Str::upper($request->chiefcomplaints);
+    $visit->examinationfindings = Str::upper($request->examinationfindings);
+    $visit->patienthistory = Str::upper($request->patienthistory);
+    $visit->diagnosis = Str::upper($request->diagnosis);
+    $visit->advise = Str::upper($request->advise);
+    $visit->systolic = $request->systolic;
+    $visit->diastolic = $request->diastolic;
+    $visit->randombs = $request->randombs;
+    $visit->pulse = $request->pulse;
+    $visit->resprate = $request->resprate;
+    $visit->spo = $request->spo;
+    if ($request->followuptype == "SOS") {
+        $visit->isSOS = true;
+        $visit->nextvisit = Carbon::createFromFormat('d/m/Y','01/01/1900');
+    }else{
+        $visit->isSOS = false;
+        $visit->nextvisit = Carbon::createFromFormat('d/m/Y',$request->nextvisit);
+    }
+    $visit->patient_id = $patient->id;
+    $visit->clinic_id = $clinic->id;
+    $visit->created_by_name = Auth::user()->name;
+    $visit->user_id = Auth::user()->id;
+    $visit->save();
+
+    if ($request->has('pathology')) {
+        $visit->pathologies()->sync($request->pathology,false);
+    }
+
+    if ($request->has('medid')) {
+        $count = 0;
+        foreach ($request->medid as $r) {
+            $prescription = new Prescription;
+            $prescription->visit_id = $visit->id;
+            $prescription->medicine_id = $request->medid[$count];
+            $prescription->medicinename = $request->mednameonly[$count];
+            $prescription->medicinecomposition = $request->medcomp[$count];
+            $prescription->doseduration = $request->doseduration[$count];
+            $prescription->dosetimings = Str::title($request->dosetimings[$count]);
+            $prescription->doseregime = Str::upper($request->doseregime[$count]);
+            $prescription->remarks = Str::upper($request->remarks[$count]);
+            $prescription->save();
+            $count++;
+        }
+    }
+
+    Session::flash('message','Success!!');
+    Session::flash('text','New Consultation Created!!');
+    Session::flash('type','success');
+
+    return redirect()->route('patients.show',$request->patient_id);
 }
 
 
