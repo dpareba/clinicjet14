@@ -146,6 +146,9 @@ class VisitController extends Controller
     $visit->pulse = $request->pulse;
     $visit->resprate = $request->resprate;
     $visit->spo = $request->spo;
+    $visit->weight = $request->weight;
+    $visit->height = $request->height;
+    $visit->bmi = $request->bmi;
     if ($request->followuptype == "SOS") {
         $visit->isSOS = true;
         $visit->nextvisit = Carbon::createFromFormat('d/m/Y','01/01/1900');

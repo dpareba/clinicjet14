@@ -226,8 +226,26 @@ Patient Visit Details
 									</div>	
 									@endif
 
-									@if (($visit->systolic != "" && $visit->diastolic !="") || $visit->randombs != "" || $visit->pulse != "" || $visit->resprate != "" || $visit->spo != "")
-										<br>
+									@if ($visit->weight != "" )
+									<div>
+										<strong>Weight </strong>{{$visit->weight}} kgs
+									</div>	
+									@endif
+
+									@if ($visit->height != "" )
+									<div>
+										<strong>Height </strong>{{$visit->height}} cms
+									</div>	
+									@endif
+
+									@if ($visit->bmi != "" )
+									<div>
+										<strong>BMI </strong>{{$visit->bmi}}
+									</div>	
+									@endif
+
+									@if (($visit->systolic != "" && $visit->diastolic !="") || $visit->randombs != "" || $visit->pulse != "" || $visit->resprate != "" || $visit->spo != "" || $visit->weight != "" || $visit->height != "" || $visit->bmi != "")
+									<br>
 									@endif
 									
 									<dl>

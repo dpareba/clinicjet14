@@ -207,6 +207,9 @@ class PatientController extends Controller
         $pulsedata = Visit::where('patient_id','=',$patient->id)->where('pulse','!=','')->get();
         $respratedata = Visit::where('patient_id','=',$patient->id)->where('resprate','!=','')->get();
         $spodata = Visit::where('patient_id','=',$patient->id)->where('spo','!=','')->get();
+        $weightdata = Visit::where('patient_id','=',$patient->id)->where('weight','!=','')->get();
+        $heightdata = Visit::where('patient_id','=',$patient->id)->where('height','!=','')->get();
+        $bmidata = Visit::where('patient_id','=',$patient->id)->where('bmi','!=','')->get();
 
         $bpchart = Charts::multi('areaspline','highcharts')
                         ->height(300)
@@ -231,7 +234,7 @@ class PatientController extends Controller
                         ->dataset('Random Blood Sugar',$randombsdata->pluck('randombs'))
                         ->responsive(false);
 
-        $pulsechart = Charts::multi('bar','highcharts')
+        $pulsechart = Charts::multi('line','highcharts')
                         ->height(300)
                         ->colors(['#2F4858'])
                         ->title('Pulse (beats per minute)')
@@ -246,10 +249,10 @@ class PatientController extends Controller
                         ->title('Respiratory Rate (breaths per minute)')
                         ->elementLabel('breaths per minute')
                         ->labels($respratedata->pluck('created_at'))
-                        ->dataset('Random Blood Sugar',$respratedata->pluck('resprate'))
+                        ->dataset('Respiratory Rate',$respratedata->pluck('resprate'))
                         ->responsive(false);
 
-        $spochart = Charts::multi('areaspline','highcharts')
+        $spochart = Charts::multi('bar','highcharts')
                         ->height(300)
                         ->colors(['#2F4858'])
                         ->title('SPO2 (%)')
@@ -258,7 +261,34 @@ class PatientController extends Controller
                         ->dataset('SPO2',$spodata->pluck('spo'))
                         ->responsive(false);
 
-        return view('patients.createconsult')->withPatient($patient)->withUser($user)->withPathologies($pathologies)->withBpchart($bpchart)->withRandombschart($randombschart)->withPulsechart($pulsechart)->withRespratechart($respratechart)->withSpochart($spochart)->withTemplates($templates);
+         $weightchart = Charts::multi('areaspline','highcharts')
+                        ->height(300)
+                        ->colors(['#2F4858'])
+                        ->title('Weight (in kgs)')
+                        ->elementLabel('kgs')
+                        ->labels($weightdata->pluck('created_at'))
+                        ->dataset('Weight',$weightdata->pluck('weight'))
+                        ->responsive(false);
+
+         $heightchart = Charts::multi('bar','highcharts')
+                        ->height(300)
+                        ->colors(['#2F4858'])
+                        ->title('height (in cms)')
+                        ->elementLabel('cms')
+                        ->labels($heightdata->pluck('created_at'))
+                        ->dataset('Height',$heightdata->pluck('height'))
+                        ->responsive(false);
+
+        $bmichart = Charts::multi('line','highcharts')
+                        ->height(300)
+                        ->colors(['#2F4858'])
+                        ->title('BMI')
+                        ->elementLabel('BMI')
+                        ->labels($bmidata->pluck('created_at'))
+                        ->dataset('BMI',$bmidata->pluck('bmi'))
+                        ->responsive(false);
+
+        return view('patients.createconsult')->withPatient($patient)->withUser($user)->withPathologies($pathologies)->withBpchart($bpchart)->withRandombschart($randombschart)->withPulsechart($pulsechart)->withRespratechart($respratechart)->withSpochart($spochart)->withWeightchart($weightchart)->withHeightchart($heightchart)->withBmichart($bmichart)->withTemplates($templates);
     }
     /**
      * Display the specified resource.

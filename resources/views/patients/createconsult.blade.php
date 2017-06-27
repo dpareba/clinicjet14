@@ -20,6 +20,12 @@ Add Consultation for Patient Visit
 		margin-bottom: 2px;
 	}
 
+	.medcolor{
+		color: black;
+	}
+
+
+
 	
 </style>
 
@@ -380,7 +386,52 @@ Add Consultation for Patient Visit
 								</div>
 							</div>
 							<hr>
+							
+							<div class="row">
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group {{ $errors->has('weight')?'has-error':''}}">
+										<div style="text-align: center;">
+											<label class="control-label" for="weight">Weight (in kgs)</label>
+										</div>
+										<input  data-parsley-type="digits" value="{{old('weight')}}"  class="form-control" id="weight" name="weight" placeholder="Weight in kgs" minlength="2" maxlength="3" style="text-align: center;" >
+										
+										<span class="help-block">{{$errors->first('weight')}}</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group {{ $errors->has('height')?'has-error':''}}">
+										<div style="text-align: center;">
+											<label class="control-label" for="height">Height (in cms)</label>
+										</div>
+										<input  data-parsley-type="digits" value="{{old('height')}}"  class="form-control" id="height" name="height" placeholder="Height in centimeters" minlength="3" maxlength="3" style="text-align: center;" >
+										
+										<span class="help-block">{{$errors->first('height')}}</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group {{ $errors->has('bmi')?'has-error':''}}">
+										<div style="text-align: center;">
+											<label class="control-label" for="bmi">BMI</label>
+										</div>
+										<input readonly=""  data-parsley-pattern="^[0-9]{2}\.[0-9]{1}$" value="{{old('bmi')}}"  class="form-control" id="bmi" name="bmi" placeholder="bmi in centimeters"  style="text-align: center;" >
+										
+										<span class="help-block">{{$errors->first('bmi')}}</span>
+									</div>
+								</div>
+							</div>
 
+							<div class="row">
+								<div class="col-md-4 col-xs-12">
+									{!! $weightchart->render() !!}
+								</div>
+								<div class="col-md-4 col-xs-12">
+									{!! $heightchart->render() !!}
+								</div>
+								<div class="col-md-4 col-xs-12">
+									{!! $bmichart->render() !!}
+								</div>
+							</div>
+							<hr>
 
 							<div class="bg-primary">
 								<hr style="height: 1px;">
@@ -415,12 +466,12 @@ Add Consultation for Patient Visit
 							<div class="row">
 								<div class="col-md-12">
 									<!-- small box -->
-									<div class="small-box bg-aqua">
+									<div class="small-box bg-gray">
 										<div class="inner">
 											<div class="row">
 												<div class="col-md-6 col-xs-12">
 													<div class="form-group {{ $errors->has('medname')?'has-error':''}}">
-														<label for="medname" id="medname" class="control-label">Brand Name</label>
+														<label for="medname" id="medname" class="control-label medcolor" >Brand Name</label>
 														<div class="pull-right box-tools">
 															<a type="button" id="addmed" class="btn btn-sm" style="color: gray;" data-toggle="modal" data-target="#myModal">
 																<i class="fa fa-plus"></i></a>
@@ -436,7 +487,7 @@ Add Consultation for Patient Visit
 
 														<div class="col-md-3 col-xs-12">
 															<div class="form-group {{ $errors->has('doseduration')?'has-error':''}}">
-																<label class="control-label" for="doseduration">Dose Duration</label>
+																<label class="control-label medcolor" for="doseduration">Dose Duration</label>
 																<select name="doseduration" id="doseduration" class="js-example-basic-single form-control">
 																	<option value="days" selected="">Days</option>
 																	<option value="weeks" selected="">Weeks</option>
@@ -451,7 +502,7 @@ Add Consultation for Patient Visit
 
 														<div class="col-md-1 col-xs-12">
 															<div class="form-group dosedurationdays {{ $errors->has('dosedurationdays')?'has-error':''}}">
-																<label class="control-label" id="dosedurationdayslabel" for="dosedurationdays">Days</label>
+																<label class="control-label medcolor" id="dosedurationdayslabel" for="dosedurationdays">Days</label>
 																<select name="dosedurationdays" id="dosedurationdays" class="js-example-basic-single form-control">
 																	{{-- appending values between 1 and 31 using jquery --}}
 																</select>
@@ -465,7 +516,7 @@ Add Consultation for Patient Visit
 													<div class="row">
 														<div class="col-md-2 col-xs-12">
 															<div class="form-group dosetime {{ $errors->has('dosetime')?'has-error':''}}">
-																<label class="control-label" for="dosetime">Dose Time</label>
+																<label class="control-label medcolor" for="dosetime">Dose Time</label>
 																<select name="dosetime" id="dosetime" class="js-example-basic-single form-control">
 																	<option value="bf" selected="selected">Before Food</option>
 																	<option value="af" >After Food</option>
@@ -477,7 +528,7 @@ Add Consultation for Patient Visit
 														</div>
 														<div class="col-md-4 col-xs-12">
 															<div class="form-group dosetimespecial {{ $errors->has('dosetimespecial')?'has-error':''}}">
-																<label class="control-label" for="dosetimespecial">Dose Time (Special Instructions)</label>
+																<label class="control-label medcolor" for="dosetimespecial">Dose Time (Special Instructions)</label>
 																<input type="text" name="dosetimespecial" id="dosetimespecial" class="form-control" style="text-transform: capitalize;">
 																<span class="help-block">{{$errors->first('dosetimespecial')}}</span>
 															</div>
@@ -485,7 +536,7 @@ Add Consultation for Patient Visit
 
 														<div class="col-md-3 col-xs-12">
 															<div class="form-group {{ $errors->has('doseregime1')?'has-error':''}}">
-																<label class="control-label" for="doseregime1">Dose Regime</label>
+																<label class="control-label medcolor" for="doseregime1">Dose Regime</label>
 																<select name="doseregime1" id="doseregime1" class="js-example-basic-single form-control">
 																	<option value="M-A-N">M-A-N</option>
 																	<option value="SOS" >SOS</option>
@@ -497,7 +548,7 @@ Add Consultation for Patient Visit
 
 														<div class="col-md-1 col-xs-12">
 															<div class="form-group dosemorning {{ $errors->has('dosemorning')?'has-error':''}}">
-																<label class="control-label" id="dosemorninglabel" for="dosemorning">Morning</label>
+																<label class="control-label medcolor" id="dosemorninglabel" for="dosemorning">Morning</label>
 																<select  name="dosemorning" id="dosemorning" class="js-example-basic-single form-control">
 																	{{-- appending values between 0 and 10 using jquery --}}
 																</select>
@@ -507,7 +558,7 @@ Add Consultation for Patient Visit
 
 														<div class="col-md-1 col-xs-12">
 															<div class="form-group doseafternoon {{ $errors->has('doseafternoon')?'has-error':''}}">
-																<label class="control-label" id="doseafternoonlabel" for="doseafternoon">Afternoon</label>
+																<label class="control-label medcolor" id="doseafternoonlabel" for="doseafternoon">Afternoon</label>
 																<select name="doseafternoon" id="doseafternoon" class="js-example-basic-single form-control">
 																	{{-- appending values between 1 and 31 using jquery --}}
 																</select>
@@ -517,7 +568,7 @@ Add Consultation for Patient Visit
 
 														<div class="col-md-1 col-xs-12">
 															<div class="form-group dosenight {{ $errors->has('dosenight')?'has-error':''}}">
-																<label class="control-label" id="dosenightlabel" for="dosenight">Night</label>
+																<label class="control-label medcolor" id="dosenightlabel" for="dosenight">Night</label>
 																<select name="dosenight" id="dosenight" class="js-example-basic-single form-control">
 																	{{-- appending values between 1 and 31 using jquery --}}
 																</select>
@@ -529,7 +580,7 @@ Add Consultation for Patient Visit
 													<div class="row">
 														<div class="col-md-6 col-md-offset-6 col-xs-12">
 															<div class="form-group doseregimespecial {{ $errors->has('doseregimespecial')?'has-error':''}}">
-																<label class="control-label" for="doseregimespeciallabel">Dose Regime (Special Instructions)</label>
+																<label class="control-label medcolor" for="doseregimespeciallabel">Dose Regime (Special Instructions)</label>
 																<div class="input-group">
 																	<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
 																	<textarea   name="doseregimespecial" id="doseregimespecial" class="form-control" cols="30" rows="2" style="resize: none;text-transform: uppercase;" placeholder="Special Instruction for Dose Regime"></textarea>
@@ -544,7 +595,7 @@ Add Consultation for Patient Visit
 													<div class="row">
 														<div class="col-md-12 col-xs-12">
 															<div class="form-group {{ $errors->has('remarks')?'has-error':''}}">
-																<label class="control-label" for="remarks">Remarks</label>
+																<label class="control-label medcolor" for="remarks">Remarks</label>
 																<div class="input-group">
 																	<span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
 																	<textarea  autofocus=""  name="remarks" id="remarks" class="form-control" cols="30" rows="2" style="resize: none;text-transform: uppercase;" placeholder="Doctor's Remarks"></textarea>
@@ -806,10 +857,28 @@ Add Consultation for Patient Visit
 												</div>	
 												@endif
 
-												@if (($visit->systolic != "" && $visit->diastolic !="") || $visit->randombs != "" || $visit->pulse != "" || $visit->resprate != "" || $visit->spo != "")
+												@if ($visit->weight != "" )
+												<div>
+													<strong>Weight </strong>{{$visit->weight}} kgs
+												</div>	
+												@endif
+
+												@if ($visit->height != "" )
+												<div>
+													<strong>Height </strong>{{$visit->height}} cms
+												</div>	
+												@endif
+
+												@if ($visit->bmi != "" )
+												<div>
+													<strong>BMI </strong>{{$visit->bmi}}
+												</div>	
+												@endif
+
+												@if (($visit->systolic != "" && $visit->diastolic !="") || $visit->randombs != "" || $visit->pulse != "" || $visit->resprate != "" || $visit->spo != "" || $visit->weight != "" || $visit->height != "" || $visit->bmi != "")
 												<br>
 												@endif
-												
+
 												<dl>
 													<dt>Recommended Clinical Followup</dt>
 													<ul>
@@ -1513,7 +1582,45 @@ $(function(){
 	});
 });
 
+$(function(){
+	$('#weight').val('');
+	$('#height').val('');
+	$('#bmi').val('');
+});
 
+$('#weight').on('input',function(){
+	if(($('#weight').val() == '')||($('#height').val() == '')){
+		$('#bmi').val('');
+	}else{
+		$w = $('#weight').val();
+		$h = $('#height').val()/100;
+		$h = $h * $h;
+		//console.log($w);
+		//console.log($h);
+		$bmi = $w/$h;
+		$bmidec = $bmi.toFixed(1);
+		//console.log($bmi);
+		//console.log($bmidec);
+		$('#bmi').val($bmidec);
+	}
+
+});
+
+$('#height').on('input',function(){
+	if(($('#weight').val() == '')||($('#height').val() == '')){
+		$('#bmi').val('');
+	}else{
+		$w = $('#weight').val();
+		$h = $('#height').val()/100;
+		$h = $h * $h;
+		
+		$bmi = $w/$h;
+		$bmidec = $bmi.toFixed(1);
+
+		$('#bmi').val($bmidec);
+	}
+
+});
 
 $("#bbb").click(function(){
 	$('#consult').validate({

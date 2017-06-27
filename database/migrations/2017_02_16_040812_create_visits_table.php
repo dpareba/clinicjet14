@@ -29,6 +29,9 @@ class CreateVisitsTable extends Migration
             $table->string('pulse')->nullable();
             $table->string('resprate')->nullable();
             $table->string('spo')->nullable();
+            $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('bmi')->nullable();
             $table->boolean('isSOS')->default(true);
             $table->date('nextvisit');
             $table->integer('clinic_id')->unsigned();

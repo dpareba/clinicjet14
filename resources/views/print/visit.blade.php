@@ -118,6 +118,18 @@
 		<div class="{{($visit->systolic != "" && $visit->diastolic != "")||$visit->randombs != ""||$visit->pulse != ""||$visit->resprate != ""?'':'cc'}}"><b>SPO2</b> {{$visit->spo}} %</div>
 	@endif
 
+	@if ($visit->weight != "")
+		<div class="{{($visit->systolic != "" && $visit->diastolic != "")||$visit->randombs != ""||$visit->pulse != ""||$visit->resprate != ""||$visit->spo != ""?'':'cc'}}"><b>Weight</b> {{$visit->weight}} kgs</div>
+	@endif
+
+	@if ($visit->height != "")
+		<div class="{{($visit->systolic != "" && $visit->diastolic != "")||$visit->randombs != ""||$visit->pulse != ""||$visit->resprate != ""||$visit->spo != ""||$visit->weight != ""?'':'cc'}}"><b>Height</b> {{$visit->height}} cms</div>
+	@endif
+
+	@if ($visit->bmi != "")
+		<div class="{{($visit->systolic != "" && $visit->diastolic != "")||$visit->randombs != ""||$visit->pulse != ""||$visit->resprate != ""||$visit->spo != ""||$visit->weight != ""||$visit->height != ""?'':'cc'}}"><b>BMI</b> {{$visit->bmi}}</div>
+	@endif
+
 	<div class="cc"><b>Recommended Clinical Follow up</b>
 		<ul>
 			@foreach ($visit->pathologies as $pathology)
